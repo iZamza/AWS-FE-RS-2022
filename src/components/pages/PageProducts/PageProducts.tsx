@@ -13,7 +13,6 @@ export default function PageProducts() {
 
   return (
     <div className={classes.content}>
-      <h1>Cloud front works!UPDATE2 important!!</h1>
       <Products/>
     </div>
   );
