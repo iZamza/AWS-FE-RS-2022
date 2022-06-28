@@ -37,12 +37,14 @@ export default function Products() {
 
   useEffect(() => {
     axios.get(productPath)
-      .then(res => setProducts(res.data.body.fetchedProductsStore));
-  }, [])
+      .then(res => setProducts(res.data.body.res));
+  }, [productPath])
 
   return (
     <>
-      <h2>This products have been fetched from <a href={productPath} target='_blank'>Lambda</a></h2>
+      <h2>This products have been fetched from
+        <a href={productPath} target='_blank'  rel="noopener noreferrer">Lambda + RDS</a>
+      </h2>
       <Grid container spacing={4}>
         {products.map((product: Product, index: number) => (
           <Grid item key={product.id} xs={12} sm={6} md={4}>
