@@ -18,6 +18,8 @@ export default function CSVFileImport({url, title}: CSVFileImportProps) {
   const classes = useStyles();
   const [file, setFile] = useState<any>();
 
+  console.log(file);
+
   const onFileChange = (e: any) => {
     console.log(e);
     let files = e.target.files || e.dataTransfer.files
@@ -31,11 +33,13 @@ export default function CSVFileImport({url, title}: CSVFileImportProps) {
 
   const uploadFile = async (e: any) => {
       // Get the presigned URL
-      const token = localStorage.getItem('AuthorisationToken');
+    console.log('here url', url);
+    const token = localStorage.getItem('AuthorisationToken');
       const response = await axios({
         method: 'GET',
         headers: {
-          Authorization: `Basic ${token}`
+          Authorization: `Basic ${token}`,
+          'Access-Control-Allow-Origin': '*'
         },
         url,
         params: {
@@ -46,9 +50,6 @@ export default function CSVFileImport({url, title}: CSVFileImportProps) {
       console.log('Uploading to: ', response.data)
       const result = await fetch(response.data, {
         method: 'PUT',
-        headers: {
-          Authorization: `Basic ${token}`
-        },
         body: file
       })
       console.log('Result: ', result)
